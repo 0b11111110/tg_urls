@@ -5,10 +5,12 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-from secret import TOKEN  # here stored token, etc
+import telegram.ext
 # mastrobot_example.py
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-import telegram.ext
+
+from dotenv import load_dotenv
+from os import getenv
 
 
 def send_url(update):
@@ -54,6 +56,8 @@ def text(update, context):
 def main():
     # create the updater, that will automatically create also a dispatcher and a queue to
     # make them dialoge
+    load_dotenv()
+    TOKEN = getenv("TOKEN")
     updater = Updater(TOKEN, use_context=True)
     dispatcher = updater.dispatcher
 
