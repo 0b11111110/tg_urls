@@ -1,4 +1,5 @@
 from http.server import BaseHTTPRequestHandler
+import main
 
 
 class handler(BaseHTTPRequestHandler):
