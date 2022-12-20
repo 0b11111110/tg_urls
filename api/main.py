@@ -18,6 +18,11 @@ def send_url(update):
         f.write(update.message.text + '\n')
 
 
+def list_url(update, context):
+    with open('urls.csv', mode='a') as f:
+        all = f.readlines()
+        update.message.reply_text = all
+
 # function to handle the /start command
 def start(update, context):
     update.message.reply_text("hi there! it's a simplest bot.\nhere is it can:")
@@ -65,6 +70,7 @@ def main():
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(CommandHandler("help", help))
     dispatcher.add_handler(CommandHandler("url", url))
+    dispatcher.add_handler(CommandHandler("list", list_file))
 
     # add an handler for normal text (not commands)
     dispatcher.add_handler(MessageHandler(Filters.text, text))
