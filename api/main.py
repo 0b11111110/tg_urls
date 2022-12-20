@@ -38,7 +38,7 @@ def url(update: telegram.Update, context):
     text_received = update.message.text
     if 'url' in (e.type for e in update.message.entities):
         update.message.reply_text(f'URL "{text_received}" received')
-        send_url(update)
+        send_url(update, context)
     else:
         update.message.reply_text(f"it's not URL: {update.message.entities.pop(1)}")
 
@@ -53,7 +53,7 @@ def text(update, context):
     text_received = update.message.text
     if 'url' in (e.type for e in update.message.entities):
         update.message.reply_text(f'URL "{text_received}" received')
-        send_url(update)
+        send_url(update, context)
     else:
         update.message.reply_text(f'did you said "{text_received}" ?')
 
@@ -70,7 +70,7 @@ def main():
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(CommandHandler("help", help))
     dispatcher.add_handler(CommandHandler("url", url))
-    dispatcher.add_handler(CommandHandler("list", list_file))
+    dispatcher.add_handler(CommandHandler("list", list_url))
 
     # add an handler for normal text (not commands)
     dispatcher.add_handler(MessageHandler(Filters.text, text))
